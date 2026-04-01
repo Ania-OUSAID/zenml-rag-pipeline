@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 @step(enable_cache=True)
 def load_pdfs(
     pdf_dir:str,
-) -> Annotated[list[tuple[str, str]],"raw_documents"]
+) -> Annotated[list[Tuple[str, str]],"raw_documents"]
 """
 obj : charger les documents pdfs d un dossier
 args:
@@ -22,7 +22,7 @@ returns: liste de tuples ( contenu_teste, nom_fichiers)
 pdf_files= sorted(glob.glob(os.path.join(pdf_dir,"*.pdf")))
 if not pdf_files:
     raise ValueError(f"aucon pdf trouve {pdf_files}")
-documents: List[tuple[str, str]]=[]
+documents: List[Tuple[str, str]]=[]
 total_pages = 0
 for pdf_path in pdf_files:
     filename=os.path.basename(pdf_path)
@@ -51,4 +51,3 @@ log_artifact_metadata(
         "pdf_names": [d[1] for d in documents]
     }
 )
-"""step 2: decouper les document en chunks"""
